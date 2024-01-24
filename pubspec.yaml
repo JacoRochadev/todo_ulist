@@ -1,5 +1,5 @@
 name: todo_ulist
-description: "A new Flutter project."
+description: "project developed for technical testing by ulist."
 publish_to: 'none'
 version: 0.1.0
 
@@ -7,6 +7,7 @@ environment:
   sdk: '>=3.3.0-279.0.dev <4.0.0'
 
 dependencies:
+  firebase_core: ^2.24.2
   flutter:
     sdk: flutter
   flutter_localizations:

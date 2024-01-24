@@ -1,8 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:todo_ulist/core/presentation/splash_page.dart';
 import 'package:todo_ulist/features/tasks/presentation/pages/task_page.dart';
 
-class AppModule extends Module {
+class TasksModule extends Module {
   @override
   void binds(i) {}
 
@@ -10,10 +9,6 @@ class AppModule extends Module {
   void routes(r) {
     r.child(
       Modular.initialRoute,
-      child: (context) => const SplashPage(),
-    );
-    r.child(
-      '/tasks',
       child: (context) => const TaskPage(),
     );
   }

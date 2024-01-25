@@ -69,6 +69,13 @@ class _TaskPageState extends State<TaskPage> {
               widget.controller.addTask(value);
 
               Navigator.pop(context);
+              if (widget.controller.isError) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Erro ao adicionar a tarefa!'),
+                  ),
+                );
+              }
             },
           );
         },

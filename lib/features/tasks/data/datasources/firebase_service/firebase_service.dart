@@ -17,20 +17,22 @@ class FirebaseService {
           tasks.add(task);
         }
       }
-      return (true, tasks);
-    } catch (e) {
       return (false, tasks);
+    } catch (e) {
+      return (true, tasks);
     }
   }
 
-  Future<TaskModel> createTask({
+  Future<bool> addTask({
     required TaskModel newTask,
   }) async {
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
-    CollectionReference tasks = firestore.collection('tasks');
-    TaskModel task = newTask;
-    tasks.add({task});
-    return task;
+    try {
+      CollectionReference tasks = _firestore.collection('tasks');
+      await tasks.add(newTask.toJson());
+      return false;
+    } catch (e) {
+      return true;
+    }
   }
 
   Future<void> deleteTask({

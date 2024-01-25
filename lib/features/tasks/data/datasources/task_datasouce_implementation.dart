@@ -7,11 +7,10 @@ class TaskDatasourceImplementation implements ITaskDatasource {
 
   TaskDatasourceImplementation(this._firebaseService);
   @override
-  Future<TaskModel> addTask(TaskModel newTask) {
-    final result = _firebaseService.createTask(
+  Future<bool> addTask(TaskModel newTask) {
+    final result = _firebaseService.addTask(
       newTask: newTask,
     );
-
     return result;
   }
 

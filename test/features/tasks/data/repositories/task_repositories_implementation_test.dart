@@ -34,4 +34,14 @@ void main() {
 
     verify(() => dataSource.getTasks()).called(1);
   });
+
+  test('should return true when addTask', () async {
+    when(() => dataSource.addTask(tTaskModel)).thenAnswer((_) async => true);
+
+    final result = await repository.addTask(tTaskModel);
+
+    await expectLater(result, true);
+
+    verify(() => dataSource.addTask(tTaskModel)).called(1);
+  });
 }

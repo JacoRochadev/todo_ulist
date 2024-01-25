@@ -1,5 +1,4 @@
 import 'package:todo_ulist/features/tasks/data/models/task_model.dart';
-import 'package:todo_ulist/features/tasks/domain/entities/task_entity.dart';
 import 'package:todo_ulist/features/tasks/domain/repositories/tasks_repository.dart';
 
 class TaskUseCases {
@@ -11,7 +10,7 @@ class TaskUseCases {
     return await _repository.getTasks();
   }
 
-  Future<TaskEntity> addTask(TaskModel newTask) async {
+  Future<bool> addTask(TaskModel newTask) async {
     return await _repository.addTask(newTask);
   }
 

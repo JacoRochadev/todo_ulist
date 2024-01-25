@@ -1,6 +1,5 @@
 import 'package:todo_ulist/features/tasks/data/datasources/task_datasouce.dart';
 import 'package:todo_ulist/features/tasks/data/models/task_model.dart';
-import 'package:todo_ulist/features/tasks/domain/entities/task_entity.dart';
 import 'package:todo_ulist/features/tasks/domain/repositories/tasks_repository.dart';
 
 class TaskRepositoryImplementation implements ITasksRepository {
@@ -8,7 +7,7 @@ class TaskRepositoryImplementation implements ITasksRepository {
 
   TaskRepositoryImplementation(this._datasource);
   @override
-  Future<TaskEntity> addTask(TaskModel newTask) {
+  Future<bool> addTask(TaskModel newTask) {
     try {
       final result = _datasource.addTask(newTask);
       return result;

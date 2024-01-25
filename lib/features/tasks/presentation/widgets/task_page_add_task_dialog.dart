@@ -4,8 +4,8 @@ import 'package:todo_ulist/features/tasks/data/models/task_model.dart';
 
 import '../../../../core/widgets/custom_text_field_widget.dart';
 
-class HomePageTaskDialog extends StatefulWidget {
-  const HomePageTaskDialog({
+class TaskPageAddTaskDialog extends StatefulWidget {
+  const TaskPageAddTaskDialog({
     super.key,
     required this.onAddTask,
   });
@@ -19,7 +19,7 @@ class HomePageTaskDialog extends StatefulWidget {
     return showAdaptiveDialog(
       context: context,
       builder: (BuildContext context) {
-        return HomePageTaskDialog(
+        return TaskPageAddTaskDialog(
           onAddTask: onAddTask,
         );
       },
@@ -27,10 +27,10 @@ class HomePageTaskDialog extends StatefulWidget {
   }
 
   @override
-  State<HomePageTaskDialog> createState() => _HomePageTaskDialogState();
+  State<TaskPageAddTaskDialog> createState() => _TaskPageAddTaskDialogState();
 }
 
-class _HomePageTaskDialogState extends State<HomePageTaskDialog> {
+class _TaskPageAddTaskDialogState extends State<TaskPageAddTaskDialog> {
   final _formKey = GlobalKey<FormState>();
   String description = '';
 

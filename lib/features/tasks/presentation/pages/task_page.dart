@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:todo_ulist/core/widgets/custom_list_item_widget.dart';
 import 'package:todo_ulist/features/tasks/presentation/stores/task_store.dart';
-import 'package:todo_ulist/features/tasks/presentation/widgets/home_page_add_task_dialog.dart';
+import 'package:todo_ulist/features/tasks/presentation/widgets/task_page_add_task_dialog.dart';
+import 'package:todo_ulist/features/tasks/presentation/widgets/task_page_update_task_dialog.dart';
 
 class TaskPage extends StatefulWidget {
   const TaskPage({
@@ -53,9 +54,9 @@ class _TaskPageState extends State<TaskPage> {
                     (element) => CustomListItemWidget(
                         element: element,
                         updateItem: () {
-                          HomePageTaskDialog.show(
+                          TaskPageUpdateTaskDialog.show(
                             context: context,
-                            onAddTask: (value) {
+                            onUpdateTask: (value) {
                               widget.controller.updateTask(element, value);
 
                               Navigator.pop(context);
@@ -85,7 +86,7 @@ class _TaskPageState extends State<TaskPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          HomePageTaskDialog.show(
+          TaskPageAddTaskDialog.show(
             context: context,
             onAddTask: (value) {
               widget.controller.addTask(value);

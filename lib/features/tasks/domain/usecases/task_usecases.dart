@@ -10,15 +10,15 @@ class TaskUseCases {
     return await _repository.getTasks();
   }
 
-  Future<TaskEntity> createTask(TaskEntity task) async {
-    return await _repository.createTask(task);
+  Future<void> createTask(String description) async {
+    return await _repository.createTask(description);
   }
 
-  Future<TaskEntity> updateTask(TaskEntity task) async {
-    return await _repository.updateTask(task);
+  Future<void> updateTask(String description) async {
+    return await _repository.updateTask(description);
   }
 
-  Future<void> deleteTask(int id) async {
+  Future<void> deleteTask(String id) async {
     return await _repository.deleteTask(id);
   }
 }

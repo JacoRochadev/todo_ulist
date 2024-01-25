@@ -1,6 +1,5 @@
 import 'package:mobx/mobx.dart';
 import 'package:todo_ulist/features/tasks/data/models/task_model.dart';
-import 'package:todo_ulist/features/tasks/domain/entities/task_entity.dart';
 import 'package:todo_ulist/features/tasks/domain/usecases/task_usecases.dart';
 
 part 'task_store.g.dart';
@@ -14,7 +13,7 @@ abstract class _TaskStoreBase with Store {
   _TaskStoreBase(this._useCases);
 
   @observable
-  ObservableList<TaskEntity> taskList = ObservableList<TaskModel>();
+  ObservableList<TaskModel> taskList = ObservableList<TaskModel>();
 
   @observable
   bool isError = false;
@@ -45,8 +44,8 @@ abstract class _TaskStoreBase with Store {
   }
 
   @action
-  Future<void> deleteTask(String id) async {
-    _useCases.deleteTask(id);
+  Future<bool> deleteTask(String id) async {
+    return _useCases.deleteTask(id);
   }
 
   @action

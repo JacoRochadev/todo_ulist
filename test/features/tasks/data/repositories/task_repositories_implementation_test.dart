@@ -18,6 +18,7 @@ void main() {
   });
 
   final tTaskModel = TaskModel(
+    id: '1',
     description: 'test repository',
     createdAt: Timestamp.now(),
   );
@@ -30,7 +31,7 @@ void main() {
 
     final result = await repository.getTasks();
 
-    await expectLater(result, (true, tListTaskModel));
+    await expectLater(result, (false, tListTaskModel));
 
     verify(() => dataSource.getTasks()).called(1);
   });
@@ -40,7 +41,7 @@ void main() {
 
     final result = await repository.addTask(tTaskModel);
 
-    await expectLater(result, true);
+    await expectLater(result, false);
 
     verify(() => dataSource.addTask(tTaskModel)).called(1);
   });

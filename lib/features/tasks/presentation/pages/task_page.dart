@@ -51,9 +51,14 @@ class _TaskPageState extends State<TaskPage> {
                     ),
                   ...widget.controller.taskList.map(
                     (element) => CustomListItemComponent(
-                      element: element,
-                      deleteItem: () {},
-                    ),
+                        element: element,
+                        deleteItem: () async {
+                          final result =
+                              await widget.controller.deleteTask(element.id!);
+                          if (result) {
+                            widget.controller.taskList.remove(element);
+                          }
+                        }),
                   ),
                 ],
               ),

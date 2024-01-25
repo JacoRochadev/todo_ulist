@@ -18,7 +18,7 @@ class TaskUseCases {
     return await _repository.updateTask(tasksOld, tasksNew);
   }
 
-  Future<void> deleteTask(String id) async {
+  Future<bool> deleteTask(String id) async {
     return await _repository.deleteTask(id);
   }
 }

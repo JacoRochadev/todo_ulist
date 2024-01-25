@@ -13,15 +13,31 @@ mixin _$TaskStore on _TaskStoreBase, Store {
       Atom(name: '_TaskStoreBase.taskList', context: context);
 
   @override
-  ObservableList<TaskEntity> get taskList {
+  ObservableList<TaskModel> get taskList {
     _$taskListAtom.reportRead();
     return super.taskList;
   }
 
   @override
-  set taskList(ObservableList<TaskEntity> value) {
+  set taskList(ObservableList<TaskModel> value) {
     _$taskListAtom.reportWrite(value, super.taskList, () {
       super.taskList = value;
+    });
+  }
+
+  late final _$isErrorAtom =
+      Atom(name: '_TaskStoreBase.isError', context: context);
+
+  @override
+  bool get isError {
+    _$isErrorAtom.reportRead();
+    return super.isError;
+  }
+
+  @override
+  set isError(bool value) {
+    _$isErrorAtom.reportWrite(value, super.isError, () {
+      super.isError = value;
     });
   }
 
@@ -45,7 +61,7 @@ mixin _$TaskStore on _TaskStoreBase, Store {
       AsyncAction('_TaskStoreBase.deleteTask', context: context);
 
   @override
-  Future<void> deleteTask(String id) {
+  Future<bool> deleteTask(String id) {
     return _$deleteTaskAsyncAction.run(() => super.deleteTask(id));
   }
 
@@ -62,6 +78,17 @@ mixin _$TaskStore on _TaskStoreBase, Store {
       ActionController(name: '_TaskStoreBase', context: context);
 
   @override
+  void changeIsError(bool value) {
+    final _$actionInfo = _$_TaskStoreBaseActionController.startAction(
+        name: '_TaskStoreBase.changeIsError');
+    try {
+      return super.changeIsError(value);
+    } finally {
+      _$_TaskStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void changeTasksList(List<TaskModel> value) {
     final _$actionInfo = _$_TaskStoreBaseActionController.startAction(
         name: '_TaskStoreBase.changeTasksList');
@@ -75,7 +102,8 @@ mixin _$TaskStore on _TaskStoreBase, Store {
   @override
   String toString() {
     return '''
-taskList: ${taskList}
+taskList: ${taskList},
+isError: ${isError}
     ''';
   }
 }

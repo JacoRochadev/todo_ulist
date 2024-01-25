@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:todo_ulist/features/tasks/data/models/task_model.dart';
 
 class FirebaseService {
@@ -10,10 +9,14 @@ class FirebaseService {
     try {
       var querySnapshot = await _firestore.collection("tasks").get();
       for (var docSnapshot in querySnapshot.docs) {
-        debugPrint('${docSnapshot.id} => ${docSnapshot.data()}');
         if (docSnapshot.exists) {
+          var docId = docSnapshot.id;
           Map<String, dynamic> jsonData = docSnapshot.data();
-          TaskModel task = TaskModel.fromJson(jsonData);
+          final newMap = {
+            'id': docId,
+            ...jsonData,
+          };
+          TaskModel task = TaskModel.fromJson(newMap);
           tasks.add(task);
         }
       }
@@ -35,12 +38,16 @@ class FirebaseService {
     }
   }
 
-  Future<void> deleteTask({
+  Future<bool> deleteTask({
     required String id,
   }) async {
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
-    CollectionReference tasks = firestore.collection('tasks');
-    tasks.doc(id).delete();
+    try {
+      CollectionReference tasks = _firestore.collection('tasks');
+      await tasks.doc(id).delete();
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   Future<void> updateTask(

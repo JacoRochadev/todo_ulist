@@ -15,7 +15,7 @@ class TaskDatasourceImplementation implements ITaskDatasource {
   }
 
   @override
-  Future<void> deleteTask(String id) {
+  Future<bool> deleteTask(String id) {
     return _firebaseService.deleteTask(id: id);
   }
 

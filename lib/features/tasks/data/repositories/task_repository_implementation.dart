@@ -17,7 +17,7 @@ class TaskRepositoryImplementation implements ITasksRepository {
   }
 
   @override
-  Future<void> deleteTask(String id) {
+  Future<bool> deleteTask(String id) {
     return _datasource.deleteTask(id);
   }
 

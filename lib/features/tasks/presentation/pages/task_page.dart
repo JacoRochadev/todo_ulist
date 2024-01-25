@@ -19,7 +19,7 @@ class _TaskPageState extends State<TaskPage> {
   @override
   void initState() {
     super.initState();
-    widget.controller.getAllTasks();
+    widget.controller.getTasks();
   }
 
   @override

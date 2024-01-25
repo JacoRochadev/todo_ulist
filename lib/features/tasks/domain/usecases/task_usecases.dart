@@ -1,3 +1,4 @@
+import 'package:todo_ulist/features/tasks/data/models/task_model.dart';
 import 'package:todo_ulist/features/tasks/domain/entities/task_entity.dart';
 import 'package:todo_ulist/features/tasks/domain/repositories/tasks_repository.dart';
 
@@ -6,7 +7,7 @@ class TaskUseCases {
 
   TaskUseCases(this._repository);
 
-  Future<List<TaskEntity>> getTasks() async {
+  Future<List<TaskModel>> getTasks() async {
     return await _repository.getTasks();
   }
 

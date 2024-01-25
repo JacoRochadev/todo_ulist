@@ -17,11 +17,11 @@ abstract class _TaskStoreBase with Store {
   ObservableList<TaskEntity> taskList = ObservableList<TaskModel>();
 
   @action
-  void changeTasksList(List<TaskEntity> value) =>
+  void changeTasksList(List<TaskModel> value) =>
       taskList = value.asObservable();
 
   @action
-  Future<void> getAllTasks() async {
+  Future<void> getTasks() async {
     final tasks_ = await _useCases.getTasks();
     changeTasksList(tasks_);
   }

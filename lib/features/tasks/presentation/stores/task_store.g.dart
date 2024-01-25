@@ -25,12 +25,12 @@ mixin _$TaskStore on _TaskStoreBase, Store {
     });
   }
 
-  late final _$getAllTasksAsyncAction =
-      AsyncAction('_TaskStoreBase.getAllTasks', context: context);
+  late final _$getTasksAsyncAction =
+      AsyncAction('_TaskStoreBase.getTasks', context: context);
 
   @override
-  Future<void> getAllTasks() {
-    return _$getAllTasksAsyncAction.run(() => super.getAllTasks());
+  Future<void> getTasks() {
+    return _$getTasksAsyncAction.run(() => super.getTasks());
   }
 
   late final _$addTaskAsyncAction =
@@ -62,7 +62,7 @@ mixin _$TaskStore on _TaskStoreBase, Store {
       ActionController(name: '_TaskStoreBase', context: context);
 
   @override
-  void changeTasksList(List<TaskEntity> value) {
+  void changeTasksList(List<TaskModel> value) {
     final _$actionInfo = _$_TaskStoreBaseActionController.startAction(
         name: '_TaskStoreBase.changeTasksList');
     try {

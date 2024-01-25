@@ -9,10 +9,7 @@ class FirebaseService {
     List<TaskModel> tasks = [];
 
     try {
-      var querySnapshot = await _firestore
-          .collection("tasks")
-          .where("description", isNull: false)
-          .get();
+      var querySnapshot = await _firestore.collection("tasks").get();
 
       for (var docSnapshot in querySnapshot.docs) {
         debugPrint('${docSnapshot.id} => ${docSnapshot.data()}');

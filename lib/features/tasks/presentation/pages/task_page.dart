@@ -50,7 +50,7 @@ class _TaskPageState extends State<TaskPage> {
                       child: Text('Adicione uma nova tarefa!'),
                     ),
                   ...widget.controller.taskList.map(
-                    (element) => CustomListItemComponent(
+                    (element) => CustomListItemWidget(
                         element: element,
                         updateItem: () {
                           HomePageTaskDialog.show(

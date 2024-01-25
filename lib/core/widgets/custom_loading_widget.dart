@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class CustomLoadingComponent extends StatelessWidget {
+class CustomLoadingWidget extends StatelessWidget {
   final EdgeInsetsGeometry padding;
-  const CustomLoadingComponent({
+  const CustomLoadingWidget({
     super.key,
     this.padding = const EdgeInsets.symmetric(vertical: 15.0),
   });

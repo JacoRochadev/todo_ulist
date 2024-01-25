@@ -4,8 +4,8 @@ import 'package:todo_ulist/features/tasks/domain/entities/task_entity.dart';
 
 typedef CompleteTaskEntityCallback = void Function(TaskEntity, bool);
 
-class CustomListItemComponent extends StatelessWidget {
-  const CustomListItemComponent({
+class CustomListItemWidget extends StatelessWidget {
+  const CustomListItemWidget({
     super.key,
     required this.element,
     required this.deleteItem,

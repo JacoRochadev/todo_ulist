@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../widgets/custom_loading_component.dart';
+import '../widgets/custom_loading_widget.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -25,7 +25,7 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: CustomLoadingComponent(),
+        child: CustomLoadingWidget(),
       ),
     );
   }

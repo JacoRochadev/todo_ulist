@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class CustomTextFieldComponent extends StatelessWidget {
+class CustomTextFieldWidget extends StatelessWidget {
   final String hint;
   final String? Function(String?)? validator;
   final TextEditingController? textEditingController;
   final TextInputType keyboardType;
   final ValueChanged<String>? onChanged;
-  const CustomTextFieldComponent({
+  const CustomTextFieldWidget({
     super.key,
     required this.hint,
     this.textEditingController,

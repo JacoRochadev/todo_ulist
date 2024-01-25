@@ -62,7 +62,7 @@ class _HomePageTaskDialogState extends State<HomePageTaskDialog> {
       ),
       content: Form(
         key: _formKey,
-        child: CustomTextFieldComponent(
+        child: CustomTextFieldWidget(
           validator: descriptionValidator,
           hint: 'descrição...',
           keyboardType: TextInputType.text,

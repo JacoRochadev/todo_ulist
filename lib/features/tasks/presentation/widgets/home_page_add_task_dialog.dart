@@ -64,7 +64,7 @@ class _HomePageTaskDialogState extends State<HomePageTaskDialog> {
         key: _formKey,
         child: CustomTextFieldComponent(
           validator: descriptionValidator,
-          hint: 'Digite o nome da tarefa',
+          hint: 'descrição...',
           keyboardType: TextInputType.text,
           onChanged: (value) {
             description = value;

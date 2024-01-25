@@ -16,7 +16,7 @@ class AppWidget extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       debugShowCheckedModeBanner: false,
-      title: 'To do List',
+      title: 'To do uList',
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
           centerTitle: true,
@@ -27,6 +27,7 @@ class AppWidget extends StatelessWidget {
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
           elevation: 0,
           backgroundColor: Color.fromARGB(255, 11, 50, 94),
+          foregroundColor: Colors.white,
         ),
       ),
       supportedLocales: const [

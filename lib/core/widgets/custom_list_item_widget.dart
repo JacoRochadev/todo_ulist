@@ -18,8 +18,8 @@ class CustomListItemComponent extends StatelessWidget {
     return ListTile(
       title: Text(
         element.description,
-        style: Theme.of(context).textTheme.labelLarge!.copyWith(
-              color: Colors.grey[600],
+        style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+              color: Colors.black,
               fontWeight: FontWeight.bold,
               decoration: TextDecoration.none,
             ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'components/custom_loading_component.dart';
+import '../widgets/custom_loading_component.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});

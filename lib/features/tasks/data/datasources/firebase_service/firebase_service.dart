@@ -50,12 +50,14 @@ class FirebaseService {
     }
   }
 
-  Future<void> updateTask(
-      {required TaskModel tasksOld, required TaskModel tasksNew}) async {
+  Future<void> updateTask({
+    required TaskModel tasksOld,
+    required TaskModel tasksNew,
+  }) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     CollectionReference tasks = firestore.collection('tasks');
-    tasks.doc().update({
-      'tasks': tasksNew,
+    tasks.doc(tasksOld.id).update({
+      'description': tasksNew.description,
     });
   }
 }

@@ -52,6 +52,23 @@ class _TaskPageState extends State<TaskPage> {
                   ...widget.controller.taskList.map(
                     (element) => CustomListItemComponent(
                         element: element,
+                        updateItem: () {
+                          HomePageTaskDialog.show(
+                            context: context,
+                            onAddTask: (value) {
+                              widget.controller.updateTask(element, value);
+
+                              Navigator.pop(context);
+                              if (widget.controller.isError) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Erro ao editar a tarefa!'),
+                                  ),
+                                );
+                              }
+                            },
+                          );
+                        },
                         deleteItem: () async {
                           final result =
                               await widget.controller.deleteTask(element.id!);

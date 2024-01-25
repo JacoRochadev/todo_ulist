@@ -9,10 +9,12 @@ class CustomListItemComponent extends StatelessWidget {
     super.key,
     required this.element,
     required this.deleteItem,
+    required this.updateItem,
   });
 
   final TaskEntity element;
   final VoidCallback deleteItem;
+  final VoidCallback updateItem;
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +36,24 @@ class CustomListItemComponent extends StatelessWidget {
               decoration: TextDecoration.none,
             ),
       ),
-      trailing: IconButton(
-        icon: const Icon(
-          Icons.delete,
-          color: Colors.red,
-        ),
-        onPressed: deleteItem,
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          IconButton(
+            icon: const Icon(
+              Icons.edit,
+              color: Colors.blue,
+            ),
+            onPressed: updateItem,
+          ),
+          IconButton(
+            icon: const Icon(
+              Icons.delete,
+              color: Colors.red,
+            ),
+            onPressed: deleteItem,
+          ),
+        ],
       ),
     );
   }

@@ -27,7 +27,7 @@ void main() {
 
   test('should return task model when calls datasource', () async {
     when(() => dataSource.getTasks())
-        .thenAnswer((_) async => (true, tListTaskModel));
+        .thenAnswer((_) async => (false, tListTaskModel));
 
     final result = await repository.getTasks();
 
@@ -37,12 +37,46 @@ void main() {
   });
 
   test('should return true when addTask', () async {
-    when(() => dataSource.addTask(tTaskModel)).thenAnswer((_) async => true);
+    when(() => dataSource.addTask(tTaskModel)).thenAnswer((_) async => false);
 
     final result = await repository.addTask(tTaskModel);
 
     await expectLater(result, false);
 
     verify(() => dataSource.addTask(tTaskModel)).called(1);
+  });
+
+  test('should delete task', () async {
+    when(() => dataSource.deleteTask(tTaskModel.id!))
+        .thenAnswer((_) async => true);
+
+    final result = await repository.deleteTask(tTaskModel.id!);
+
+    await expectLater(result, true);
+
+    verify(() => dataSource.deleteTask(tTaskModel.id!)).called(1);
+  });
+
+  final tTaskModelOld = TaskModel(
+    id: '1',
+    description: 'test repository',
+    createdAt: Timestamp.now(),
+  );
+
+  final tTaskModelNew = TaskModel(
+    id: '1',
+    description: 'test update',
+    createdAt: Timestamp.now(),
+  );
+
+  test('must update the task description', () async {
+    when(() => dataSource.updateTask(tTaskModelOld, tTaskModelNew))
+        .thenAnswer((_) async => false);
+
+    final result = await repository.updateTask(tTaskModelOld, tTaskModelNew);
+
+    await expectLater(result, false);
+
+    verify(() => dataSource.updateTask(tTaskModelOld, tTaskModelNew)).called(1);
   });
 }

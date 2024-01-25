@@ -69,7 +69,7 @@ mixin _$TaskStore on _TaskStoreBase, Store {
       AsyncAction('_TaskStoreBase.updateTask', context: context);
 
   @override
-  Future<void> updateTask(TaskModel tasksOld, TaskModel tasksNew) {
+  Future<bool> updateTask(TaskModel tasksOld, TaskModel tasksNew) {
     return _$updateTaskAsyncAction
         .run(() => super.updateTask(tasksOld, tasksNew));
   }

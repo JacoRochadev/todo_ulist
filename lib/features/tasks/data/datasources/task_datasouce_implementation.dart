@@ -25,7 +25,7 @@ class TaskDatasourceImplementation implements ITaskDatasource {
   }
 
   @override
-  Future<void> updateTask(TaskModel tasksOld, TaskModel tasksNew) {
+  Future<bool> updateTask(TaskModel tasksOld, TaskModel tasksNew) {
     return _firebaseService.updateTask(
       tasksOld: tasksOld,
       tasksNew: tasksNew,

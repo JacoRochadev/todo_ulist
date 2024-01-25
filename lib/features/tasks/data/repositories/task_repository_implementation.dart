@@ -28,7 +28,7 @@ class TaskRepositoryImplementation implements ITasksRepository {
   }
 
   @override
-  Future<void> updateTask(TaskModel tasksOld, TaskModel tasksNew) {
+  Future<bool> updateTask(TaskModel tasksOld, TaskModel tasksNew) {
     try {
       final result = _datasource.updateTask(tasksOld, tasksNew);
       return result;

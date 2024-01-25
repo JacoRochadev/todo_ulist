@@ -49,9 +49,9 @@ abstract class _TaskStoreBase with Store {
   }
 
   @action
-  Future<void> updateTask(TaskModel tasksOld, TaskModel tasksNew) async {
-    await _useCases.updateTask(tasksOld, tasksNew);
+  Future<bool> updateTask(TaskModel tasksOld, TaskModel tasksNew) async {
     final index = taskList.indexOf(tasksOld);
     taskList[index] = tasksNew;
+    return await _useCases.updateTask(tasksOld, tasksNew);
   }
 }

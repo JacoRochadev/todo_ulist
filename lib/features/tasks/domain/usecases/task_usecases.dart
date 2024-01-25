@@ -14,7 +14,7 @@ class TaskUseCases {
     return await _repository.addTask(newTask);
   }
 
-  Future<void> updateTask(TaskModel tasksOld, TaskModel tasksNew) async {
+  Future<bool> updateTask(TaskModel tasksOld, TaskModel tasksNew) async {
     return await _repository.updateTask(tasksOld, tasksNew);
   }
 

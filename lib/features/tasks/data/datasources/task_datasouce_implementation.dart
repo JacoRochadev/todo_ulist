@@ -1,9 +1,9 @@
-import 'package:todo_ulist/features/tasks/data/datasources/firebase_service/firebase_service.dart';
+import 'package:todo_ulist/features/tasks/data/datasources/firebase_service_task/firebase_service_task.dart';
 import 'package:todo_ulist/features/tasks/data/datasources/task_datasouce.dart';
 import 'package:todo_ulist/features/tasks/data/models/task_model.dart';
 
 class TaskDatasourceImplementation implements ITaskDatasource {
-  final FirebaseService _firebaseService;
+  final FirebaseServiceTask _firebaseService;
 
   TaskDatasourceImplementation(this._firebaseService);
   @override

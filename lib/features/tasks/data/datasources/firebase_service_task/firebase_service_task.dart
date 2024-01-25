@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:todo_ulist/features/tasks/data/models/task_model.dart';
 
-class FirebaseService {
+class FirebaseServiceTask {
   final _firestore = FirebaseFirestore.instance;
 
   Future<(bool, List<TaskModel>)> getTasks() async {

@@ -56,7 +56,7 @@ class _TaskPageAddTaskDialogState extends State<TaskPageAddTaskDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(
-        'Tarefa',
+        'Nova tarefa',
         style: Theme.of(context).textTheme.titleLarge!.copyWith(
               fontWeight: FontWeight.bold,
             ),

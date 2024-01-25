@@ -7,18 +7,22 @@ class TaskPageUpdateTaskDialog extends StatefulWidget {
   const TaskPageUpdateTaskDialog({
     super.key,
     required this.onUpdateTask,
+    required this.description,
   });
   final ValueChanged<TaskModel> onUpdateTask;
+  final String description;
 
   static Future<void> show({
     required BuildContext context,
     required ValueChanged<TaskModel> onUpdateTask,
+    required String description,
   }) {
     return showAdaptiveDialog(
       context: context,
       builder: (BuildContext context) {
         return TaskPageUpdateTaskDialog(
           onUpdateTask: onUpdateTask,
+          description: description,
         );
       },
     );
@@ -55,7 +59,7 @@ class _TaskPageUpdateTaskDialogState extends State<TaskPageUpdateTaskDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(
-        'Tarefa',
+        'Alterar tarefa',
         style: Theme.of(context).textTheme.titleLarge!.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -63,6 +67,7 @@ class _TaskPageUpdateTaskDialogState extends State<TaskPageUpdateTaskDialog> {
       content: Form(
         key: _formKey,
         child: CustomTextFieldWidget(
+          initialValue: widget.description,
           validator: descriptionValidator,
           hint: 'descrição...',
           keyboardType: TextInputType.text,

@@ -56,6 +56,7 @@ class _TaskPageState extends State<TaskPage> {
                               element: element,
                               updateItem: () {
                                 TaskPageUpdateTaskDialog.show(
+                                  description: element.description,
                                   context: context,
                                   onUpdateTask: (value) async {
                                     await widget.controller

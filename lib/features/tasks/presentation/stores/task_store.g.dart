@@ -57,6 +57,22 @@ mixin _$TaskStore on _TaskStoreBase, Store {
     });
   }
 
+  late final _$filteredTaskListAtom =
+      Atom(name: '_TaskStoreBase.filteredTaskList', context: context);
+
+  @override
+  ObservableList<TaskModel> get filteredTaskList {
+    _$filteredTaskListAtom.reportRead();
+    return super.filteredTaskList;
+  }
+
+  @override
+  set filteredTaskList(ObservableList<TaskModel> value) {
+    _$filteredTaskListAtom.reportWrite(value, super.filteredTaskList, () {
+      super.filteredTaskList = value;
+    });
+  }
+
   late final _$getTasksAsyncAction =
       AsyncAction('_TaskStoreBase.getTasks', context: context);
 
@@ -94,11 +110,11 @@ mixin _$TaskStore on _TaskStoreBase, Store {
       ActionController(name: '_TaskStoreBase', context: context);
 
   @override
-  void changeIsLoading(bool value) {
+  void changeTasksList(List<TaskModel> value) {
     final _$actionInfo = _$_TaskStoreBaseActionController.startAction(
-        name: '_TaskStoreBase.changeIsLoading');
+        name: '_TaskStoreBase.changeTasksList');
     try {
-      return super.changeIsLoading(value);
+      return super.changeTasksList(value);
     } finally {
       _$_TaskStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -116,11 +132,33 @@ mixin _$TaskStore on _TaskStoreBase, Store {
   }
 
   @override
-  void changeTasksList(List<TaskModel> value) {
+  void changeIsLoading(bool value) {
     final _$actionInfo = _$_TaskStoreBaseActionController.startAction(
-        name: '_TaskStoreBase.changeTasksList');
+        name: '_TaskStoreBase.changeIsLoading');
     try {
-      return super.changeTasksList(value);
+      return super.changeIsLoading(value);
+    } finally {
+      _$_TaskStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void updateFilteredTaskList(List<TaskModel> value) {
+    final _$actionInfo = _$_TaskStoreBaseActionController.startAction(
+        name: '_TaskStoreBase.updateFilteredTaskList');
+    try {
+      return super.updateFilteredTaskList(value);
+    } finally {
+      _$_TaskStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void searchTasks(String query) {
+    final _$actionInfo = _$_TaskStoreBaseActionController.startAction(
+        name: '_TaskStoreBase.searchTasks');
+    try {
+      return super.searchTasks(query);
     } finally {
       _$_TaskStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -131,7 +169,8 @@ mixin _$TaskStore on _TaskStoreBase, Store {
     return '''
 taskList: ${taskList},
 isError: ${isError},
-isLoading: ${isLoading}
+isLoading: ${isLoading},
+filteredTaskList: ${filteredTaskList}
     ''';
   }
 }

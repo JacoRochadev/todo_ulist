@@ -21,15 +21,22 @@ abstract class _TaskStoreBase with Store {
   @observable
   bool isLoading = false;
 
+  @observable
+  ObservableList<TaskModel> filteredTaskList = ObservableList<TaskModel>();
+
   @action
-  void changeIsLoading(bool value) => isLoading = value;
+  void changeTasksList(List<TaskModel> value) =>
+      taskList = value.asObservable();
 
   @action
   void changeIsError(bool value) => isError = value;
 
   @action
-  void changeTasksList(List<TaskModel> value) =>
-      taskList = value.asObservable();
+  void changeIsLoading(bool value) => isLoading = value;
+
+  @action
+  void updateFilteredTaskList(List<TaskModel> value) =>
+      filteredTaskList = value.asObservable();
 
   @action
   Future<(bool, List<TaskModel>)> getTasks() async {
@@ -37,6 +44,7 @@ abstract class _TaskStoreBase with Store {
     final tasks_ = await _useCases.getTasks();
     changeIsError(tasks_.$1);
     changeTasksList(tasks_.$2);
+    updateFilteredTaskList(tasks_.$2);
     changeIsLoading(false);
     return tasks_;
   }
@@ -63,5 +71,14 @@ abstract class _TaskStoreBase with Store {
       changeIsError(error);
     }
     return error;
+  }
+
+  @action
+  void searchTasks(String query) {
+    final filteredTasks = taskList
+        .where((task) =>
+            task.description.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+    updateFilteredTaskList(filteredTasks);
   }
 }

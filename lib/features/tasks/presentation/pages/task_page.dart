@@ -19,6 +19,8 @@ class TaskPage extends StatefulWidget {
 }
 
 class _TaskPageState extends State<TaskPage> {
+  final TextEditingController _searchController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -52,35 +54,60 @@ class _TaskPageState extends State<TaskPage> {
                           )
                         : ListView(
                             children: [
-                              if (widget.controller.taskList.isEmpty)
-                                const Center(
-                                  child: Text('Adicione uma nova tarefa!'),
+                              TextField(
+                                controller: _searchController,
+                                onChanged: (query) {
+                                  widget.controller.searchTasks(query);
+                                },
+                                decoration: const InputDecoration(
+                                  prefixIcon: Icon(
+                                    Icons.search_rounded,
+                                  ),
+                                  hintText: 'Procurar',
                                 ),
-                              ...widget.controller.taskList.map(
-                                (element) => CustomListItemWidget(
-                                    element: element,
-                                    updateItem: () {
-                                      TaskPageUpdateTaskDialog.show(
-                                        description: element.description,
-                                        context: context,
-                                        onUpdateTask: (value) async {
-                                          await widget.controller
-                                              .updateTask(element, value);
-                                          await widget.controller.getTasks();
-
-                                          Modular.to.pop();
-                                        },
-                                      );
-                                    },
-                                    deleteItem: () async {
-                                      final result = await widget.controller
-                                          .deleteTask(element.id!);
-                                      if (result) {
-                                        widget.controller.taskList
-                                            .remove(element);
-                                      }
-                                    }),
                               ),
+                              Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 16,
+                                  ),
+                                  if (widget.controller.filteredTaskList
+                                          .isEmpty &&
+                                      _searchController.text.isNotEmpty)
+                                    const Center(
+                                      child: Text('Adicione uma nova tarefa!'),
+                                    )
+                                  else
+                                    ...widget.controller.filteredTaskList.map(
+                                      (element) => CustomListItemWidget(
+                                          element: element,
+                                          updateItem: () {
+                                            TaskPageUpdateTaskDialog.show(
+                                              description: element.description,
+                                              context: context,
+                                              onUpdateTask: (value) async {
+                                                await widget.controller
+                                                    .updateTask(element, value);
+                                                await widget.controller
+                                                    .getTasks();
+
+                                                Modular.to.pop();
+                                              },
+                                            );
+                                          },
+                                          deleteItem: () async {
+                                            final result = await widget
+                                                .controller
+                                                .deleteTask(element.id!);
+                                            await widget.controller.getTasks();
+                                            if (result) {
+                                              widget.controller.taskList
+                                                  .remove(element);
+                                            }
+                                          }),
+                                    ),
+                                ],
+                              )
                             ],
                           ),
                   ),

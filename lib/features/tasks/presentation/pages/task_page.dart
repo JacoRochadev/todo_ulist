@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:todo_ulist/core/widgets/custom_list_item_widget.dart';
 import 'package:todo_ulist/features/tasks/presentation/stores/task_store.dart';
-import 'package:todo_ulist/features/tasks/presentation/widgets/custom_list_item_widget.dart';
 import 'package:todo_ulist/features/tasks/presentation/widgets/home_page_add_task_dialog.dart';
 
 class TaskPage extends StatefulWidget {
@@ -56,7 +56,7 @@ class _TaskPageState extends State<TaskPage> {
           HomePageTaskDialog.show(
             context: context,
             onAddTask: (value) {
-              widget.controller.addTask(value.description);
+              widget.controller.addTask(value);
 
               Navigator.pop(context);
             },

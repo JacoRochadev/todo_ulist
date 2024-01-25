@@ -37,8 +37,8 @@ mixin _$TaskStore on _TaskStoreBase, Store {
       AsyncAction('_TaskStoreBase.addTask', context: context);
 
   @override
-  Future<void> addTask(String description) {
-    return _$addTaskAsyncAction.run(() => super.addTask(description));
+  Future<void> addTask(TaskModel newTask) {
+    return _$addTaskAsyncAction.run(() => super.addTask(newTask));
   }
 
   late final _$deleteTaskAsyncAction =
@@ -49,13 +49,13 @@ mixin _$TaskStore on _TaskStoreBase, Store {
     return _$deleteTaskAsyncAction.run(() => super.deleteTask(id));
   }
 
-  late final _$updateTaskListAsyncAction =
-      AsyncAction('_TaskStoreBase.updateTaskList', context: context);
+  late final _$updateTaskAsyncAction =
+      AsyncAction('_TaskStoreBase.updateTask', context: context);
 
   @override
-  Future<void> updateTaskList(TaskEntity tasksOld, TaskEntity tasksNew) {
-    return _$updateTaskListAsyncAction
-        .run(() => super.updateTaskList(tasksOld, tasksNew));
+  Future<void> updateTask(TaskModel tasksOld, TaskModel tasksNew) {
+    return _$updateTaskAsyncAction
+        .run(() => super.updateTask(tasksOld, tasksNew));
   }
 
   late final _$_TaskStoreBaseActionController =

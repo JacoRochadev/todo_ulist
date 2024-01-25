@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_ulist/features/tasks/domain/entities/task_entity.dart';
+import 'package:todo_ulist/features/tasks/data/models/task_model.dart';
 
-import 'custom_text_field_widget.dart';
+import '../../../../core/widgets/custom_text_field_widget.dart';
 
 class HomePageTaskDialog extends StatefulWidget {
   const HomePageTaskDialog({
@@ -10,11 +10,11 @@ class HomePageTaskDialog extends StatefulWidget {
     required this.onAddTask,
   });
 
-  final ValueChanged<TaskEntity> onAddTask;
+  final ValueChanged<TaskModel> onAddTask;
 
   static Future<void> show({
     required BuildContext context,
-    required ValueChanged<TaskEntity> onAddTask,
+    required ValueChanged<TaskModel> onAddTask,
   }) {
     return showAdaptiveDialog(
       context: context,
@@ -32,9 +32,9 @@ class HomePageTaskDialog extends StatefulWidget {
 
 class _HomePageTaskDialogState extends State<HomePageTaskDialog> {
   final _formKey = GlobalKey<FormState>();
-  String name = '';
+  String description = '';
 
-  String? nameValidator(String? value) {
+  String? descriptionValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'Campo obrigatório';
     }
@@ -44,8 +44,8 @@ class _HomePageTaskDialogState extends State<HomePageTaskDialog> {
   void addTask() {
     if (!_formKey.currentState!.validate()) return;
     widget.onAddTask(
-      TaskEntity(
-        description: name,
+      TaskModel(
+        description: description,
         createdAt: Timestamp.now(),
       ),
     );
@@ -63,11 +63,11 @@ class _HomePageTaskDialogState extends State<HomePageTaskDialog> {
       content: Form(
         key: _formKey,
         child: CustomTextFieldComponent(
-          validator: nameValidator,
+          validator: descriptionValidator,
           hint: 'Digite o nome da tarefa',
           keyboardType: TextInputType.text,
           onChanged: (value) {
-            name = value;
+            description = value;
           },
         ),
       ),

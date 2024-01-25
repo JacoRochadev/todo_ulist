@@ -11,11 +11,11 @@ class TaskUseCases {
     return await _repository.getTasks();
   }
 
-  Future<TaskEntity> createTask(String description) async {
-    return await _repository.createTask(description);
+  Future<TaskEntity> addTask(TaskModel newTask) async {
+    return await _repository.addTask(newTask);
   }
 
-  Future<void> updateTask(TaskEntity tasksOld, TaskEntity tasksNew) async {
+  Future<void> updateTask(TaskModel tasksOld, TaskModel tasksNew) async {
     return await _repository.updateTask(tasksOld, tasksNew);
   }
 

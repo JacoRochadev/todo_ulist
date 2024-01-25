@@ -1,16 +1,15 @@
 import 'package:todo_ulist/features/tasks/data/datasources/firebase_service/firebase_service.dart';
 import 'package:todo_ulist/features/tasks/data/datasources/task_datasouce.dart';
 import 'package:todo_ulist/features/tasks/data/models/task_model.dart';
-import 'package:todo_ulist/features/tasks/domain/entities/task_entity.dart';
 
 class TaskDatasourceImplementation implements ITaskDatasource {
   final FirebaseService _firebaseService;
 
   TaskDatasourceImplementation(this._firebaseService);
   @override
-  Future<TaskEntity> createTask(String description) {
+  Future<TaskModel> addTask(TaskModel newTask) {
     final result = _firebaseService.createTask(
-      description: description,
+      newTask: newTask,
     );
 
     return result;
@@ -27,7 +26,7 @@ class TaskDatasourceImplementation implements ITaskDatasource {
   }
 
   @override
-  Future<void> updateTask(TaskEntity tasksOld, TaskEntity tasksNew) {
+  Future<void> updateTask(TaskModel tasksOld, TaskModel tasksNew) {
     return _firebaseService.updateTask(
       tasksOld: tasksOld,
       tasksNew: tasksNew,

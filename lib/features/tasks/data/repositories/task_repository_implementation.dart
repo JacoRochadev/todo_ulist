@@ -8,9 +8,9 @@ class TaskRepositoryImplementation implements ITasksRepository {
 
   TaskRepositoryImplementation(this._datasource);
   @override
-  Future<TaskEntity> createTask(String description) {
+  Future<TaskEntity> addTask(TaskModel newTask) {
     try {
-      final result = _datasource.createTask(description);
+      final result = _datasource.addTask(newTask);
       return result;
     } catch (e) {
       rethrow;
@@ -29,7 +29,7 @@ class TaskRepositoryImplementation implements ITasksRepository {
   }
 
   @override
-  Future<void> updateTask(TaskEntity tasksOld, TaskEntity tasksNew) {
+  Future<void> updateTask(TaskModel tasksOld, TaskModel tasksNew) {
     try {
       final result = _datasource.updateTask(tasksOld, tasksNew);
       return result;

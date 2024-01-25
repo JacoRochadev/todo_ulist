@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:todo_ulist/features/tasks/data/models/task_model.dart';
-import 'package:todo_ulist/features/tasks/domain/entities/task_entity.dart';
 
 class FirebaseService {
   final _firestore = FirebaseFirestore.instance;
@@ -34,15 +33,12 @@ class FirebaseService {
     return tasks;
   }
 
-  Future<TaskEntity> createTask({
-    required String description,
+  Future<TaskModel> createTask({
+    required TaskModel newTask,
   }) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     CollectionReference tasks = firestore.collection('tasks');
-    TaskEntity task = TaskEntity(
-      description: description,
-      createdAt: Timestamp.now(),
-    );
+    TaskModel task = newTask;
     tasks.add({task});
     return task;
   }
@@ -56,21 +52,11 @@ class FirebaseService {
   }
 
   Future<void> updateTask(
-      {required TaskEntity tasksOld, required TaskEntity tasksNew}) async {
+      {required TaskModel tasksOld, required TaskModel tasksNew}) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     CollectionReference tasks = firestore.collection('tasks');
     tasks.doc().update({
       'tasks': tasksNew,
     });
   }
-
-  // Future<List<TaskModel>> getTasks() async {
-  //   //TODO: AJUSTAR ISSO AMANHÃ
-  //   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  //   final tasks = firestore.collection('tasks').snapshots();
-
-  //   return tasks.map((e) {
-  //     return TaskModel.fromJson(e.docs.first.data());
-  //   }).toList();
-  // }
 }

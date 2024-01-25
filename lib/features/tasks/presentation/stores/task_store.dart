@@ -27,8 +27,8 @@ abstract class _TaskStoreBase with Store {
   }
 
   @action
-  Future<void> addTask(String description) async {
-    final TaskEntity task_ = await _useCases.createTask(description);
+  Future<void> addTask(TaskModel newTask) async {
+    final TaskEntity task_ = await _useCases.addTask(newTask);
     taskList.add(task_);
   }
 
@@ -38,7 +38,7 @@ abstract class _TaskStoreBase with Store {
   }
 
   @action
-  Future<void> updateTaskList(TaskEntity tasksOld, TaskEntity tasksNew) async {
+  Future<void> updateTask(TaskModel tasksOld, TaskModel tasksNew) async {
     await _useCases.updateTask(tasksOld, tasksNew);
     final index = taskList.indexOf(tasksOld);
     taskList[index] = tasksNew;

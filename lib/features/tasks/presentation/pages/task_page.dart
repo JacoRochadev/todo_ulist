@@ -40,46 +40,49 @@ class _TaskPageState extends State<TaskPage> {
           return Padding(
             padding: const EdgeInsets.all(16.0),
             child: Center(
-              child: ListView(
-                children: [
-                  if (widget.controller.isError)
-                    const Center(
+              child: (widget.controller.isError)
+                  ? const Center(
                       child: Text('Erro ao carregar as tarefas!'),
-                    ),
-                  if (widget.controller.taskList.isEmpty)
-                    const Center(
-                      child: Text('Adicione uma nova tarefa!'),
-                    ),
-                  ...widget.controller.taskList.map(
-                    (element) => CustomListItemWidget(
-                        element: element,
-                        updateItem: () {
-                          TaskPageUpdateTaskDialog.show(
-                            context: context,
-                            onUpdateTask: (value) {
-                              widget.controller.updateTask(element, value);
+                    )
+                  : ListView(
+                      children: [
+                        if (widget.controller.taskList.isEmpty)
+                          const Center(
+                            child: Text('Adicione uma nova tarefa!'),
+                          ),
+                        ...widget.controller.taskList.map(
+                          (element) => CustomListItemWidget(
+                              element: element,
+                              updateItem: () {
+                                TaskPageUpdateTaskDialog.show(
+                                  context: context,
+                                  onUpdateTask: (value) {
+                                    widget.controller
+                                        .updateTask(element, value);
 
-                              Navigator.pop(context);
-                              if (widget.controller.isError) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Erro ao editar a tarefa!'),
-                                  ),
+                                    Navigator.pop(context);
+                                    if (widget.controller.isError) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          content:
+                                              Text('Erro ao editar a tarefa!'),
+                                        ),
+                                      );
+                                    }
+                                  },
                                 );
-                              }
-                            },
-                          );
-                        },
-                        deleteItem: () async {
-                          final result =
-                              await widget.controller.deleteTask(element.id!);
-                          if (result) {
-                            widget.controller.taskList.remove(element);
-                          }
-                        }),
-                  ),
-                ],
-              ),
+                              },
+                              deleteItem: () async {
+                                final result = await widget.controller
+                                    .deleteTask(element.id!);
+                                if (result) {
+                                  widget.controller.taskList.remove(element);
+                                }
+                              }),
+                        ),
+                      ],
+                    ),
             ),
           );
         },

@@ -52,6 +52,10 @@ abstract class _TaskStoreBase with Store {
   Future<bool> updateTask(TaskModel tasksOld, TaskModel tasksNew) async {
     final index = taskList.indexOf(tasksOld);
     taskList[index] = tasksNew;
-    return await _useCases.updateTask(tasksOld, tasksNew);
+    final error = await _useCases.updateTask(tasksOld, tasksNew);
+    if (error) {
+      changeIsError(error);
+    }
+    return error;
   }
 }

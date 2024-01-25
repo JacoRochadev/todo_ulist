@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:todo_ulist/core/widgets/custom_list_item_widget.dart';
 import 'package:todo_ulist/features/tasks/presentation/stores/task_store.dart';
 import 'package:todo_ulist/features/tasks/presentation/widgets/task_page_add_task_dialog.dart';
@@ -56,20 +57,12 @@ class _TaskPageState extends State<TaskPage> {
                               updateItem: () {
                                 TaskPageUpdateTaskDialog.show(
                                   context: context,
-                                  onUpdateTask: (value) {
-                                    widget.controller
+                                  onUpdateTask: (value) async {
+                                    await widget.controller
                                         .updateTask(element, value);
+                                    await widget.controller.getTasks();
 
-                                    Navigator.pop(context);
-                                    if (widget.controller.isError) {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        const SnackBar(
-                                          content:
-                                              Text('Erro ao editar a tarefa!'),
-                                        ),
-                                      );
-                                    }
+                                    Modular.to.pop();
                                   },
                                 );
                               },
@@ -93,6 +86,7 @@ class _TaskPageState extends State<TaskPage> {
             context: context,
             onAddTask: (value) {
               widget.controller.addTask(value);
+              widget.controller.getTasks();
 
               Navigator.pop(context);
               if (widget.controller.isError) {

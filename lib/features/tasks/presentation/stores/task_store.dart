@@ -36,9 +36,7 @@ abstract class _TaskStoreBase with Store {
   @action
   Future<void> addTask(TaskModel newTask) async {
     final error = await _useCases.addTask(newTask);
-    if (!error) {
-      taskList.add(newTask);
-    } else {
+    if (error) {
       changeIsError(true);
     }
   }

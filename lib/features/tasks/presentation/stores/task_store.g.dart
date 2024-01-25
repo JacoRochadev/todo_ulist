@@ -41,6 +41,22 @@ mixin _$TaskStore on _TaskStoreBase, Store {
     });
   }
 
+  late final _$isLoadingAtom =
+      Atom(name: '_TaskStoreBase.isLoading', context: context);
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
   late final _$getTasksAsyncAction =
       AsyncAction('_TaskStoreBase.getTasks', context: context);
 
@@ -78,6 +94,17 @@ mixin _$TaskStore on _TaskStoreBase, Store {
       ActionController(name: '_TaskStoreBase', context: context);
 
   @override
+  void changeIsLoading(bool value) {
+    final _$actionInfo = _$_TaskStoreBaseActionController.startAction(
+        name: '_TaskStoreBase.changeIsLoading');
+    try {
+      return super.changeIsLoading(value);
+    } finally {
+      _$_TaskStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void changeIsError(bool value) {
     final _$actionInfo = _$_TaskStoreBaseActionController.startAction(
         name: '_TaskStoreBase.changeIsError');
@@ -103,7 +130,8 @@ mixin _$TaskStore on _TaskStoreBase, Store {
   String toString() {
     return '''
 taskList: ${taskList},
-isError: ${isError}
+isError: ${isError},
+isLoading: ${isLoading}
     ''';
   }
 }

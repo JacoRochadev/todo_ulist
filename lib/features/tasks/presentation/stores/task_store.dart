@@ -18,6 +18,12 @@ abstract class _TaskStoreBase with Store {
   @observable
   bool isError = false;
 
+  @observable
+  bool isLoading = false;
+
+  @action
+  void changeIsLoading(bool value) => isLoading = value;
+
   @action
   void changeIsError(bool value) => isError = value;
 
@@ -27,9 +33,11 @@ abstract class _TaskStoreBase with Store {
 
   @action
   Future<(bool, List<TaskModel>)> getTasks() async {
+    changeIsLoading(true);
     final tasks_ = await _useCases.getTasks();
     changeIsError(tasks_.$1);
     changeTasksList(tasks_.$2);
+    changeIsLoading(false);
     return tasks_;
   }
 

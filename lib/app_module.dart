@@ -1,5 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:todo_ulist/core/presentation/splash_page.dart';
+import 'package:todo_ulist/core/presentation/pages/splash_page.dart';
 import 'package:todo_ulist/features/tasks/tasks_module.dart';
 
 class AppModule extends Module {

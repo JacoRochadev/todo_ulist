@@ -36,14 +36,19 @@ void main() {
     verify(() => dataSource.getTasks()).called(1);
   });
 
+  final tTaskModelAdd = TaskModel(
+    description: 'test repository',
+    createdAt: Timestamp.now(),
+  );
   test('should return true when addTask', () async {
-    when(() => dataSource.addTask(tTaskModel)).thenAnswer((_) async => false);
+    when(() => dataSource.addTask(tTaskModelAdd))
+        .thenAnswer((_) async => false);
 
-    final result = await repository.addTask(tTaskModel);
+    final result = await repository.addTask(tTaskModelAdd);
 
     await expectLater(result, false);
 
-    verify(() => dataSource.addTask(tTaskModel)).called(1);
+    verify(() => dataSource.addTask(tTaskModelAdd)).called(1);
   });
 
   test('should delete task', () async {

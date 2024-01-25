@@ -21,6 +21,7 @@ void main() {
     id: '1',
     description: 'test repository',
     createdAt: Timestamp.now(),
+    updatedAt: null,
   );
 
   tListTaskModel.add(tTaskModel);
@@ -39,6 +40,7 @@ void main() {
   final tTaskModelAdd = TaskModel(
     description: 'test repository',
     createdAt: Timestamp.now(),
+    updatedAt: null,
   );
   test('should return true when addTask', () async {
     when(() => dataSource.addTask(tTaskModelAdd))
@@ -66,12 +68,14 @@ void main() {
     id: '1',
     description: 'test repository',
     createdAt: Timestamp.now(),
+    updatedAt: null,
   );
 
   final tTaskModelNew = TaskModel(
-    id: '1',
+    id: tTaskModelOld.id,
     description: 'test update',
-    createdAt: Timestamp.now(),
+    createdAt: tTaskModelOld.createdAt,
+    updatedAt: Timestamp.now(),
   );
 
   test('must update the task description', () async {

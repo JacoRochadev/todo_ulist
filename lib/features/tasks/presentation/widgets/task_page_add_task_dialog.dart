@@ -47,6 +47,7 @@ class _TaskPageAddTaskDialogState extends State<TaskPageAddTaskDialog> {
       TaskModel(
         description: description,
         createdAt: Timestamp.now(),
+        updatedAt: null,
       ),
     );
   }

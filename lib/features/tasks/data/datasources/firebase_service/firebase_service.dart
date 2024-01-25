@@ -58,6 +58,7 @@ class FirebaseService {
       CollectionReference tasks = _firestore.collection('tasks');
       await tasks.doc(tasksOld.id).update({
         'description': tasksNew.description,
+        'updatedAt': tasksNew.updatedAt,
       });
       return false;
     } catch (e) {

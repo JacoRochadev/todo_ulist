@@ -7,6 +7,7 @@ class TaskModel extends TaskEntity {
     this.id,
     required super.description,
     required super.createdAt,
+    required super.updatedAt,
   });
 
   factory TaskModel.fromJson(Map<String, dynamic> json) {
@@ -14,6 +15,7 @@ class TaskModel extends TaskEntity {
       id: json['id'],
       description: json['description'],
       createdAt: json['createdAt'],
+      updatedAt: json['updatedAt'],
     );
   }
 
@@ -21,6 +23,7 @@ class TaskModel extends TaskEntity {
     return {
       'description': description,
       'createdAt': createdAt,
+      'updatedAt': updatedAt,
     };
   }
 
@@ -28,14 +31,21 @@ class TaskModel extends TaskEntity {
     String? id,
     String? description,
     Timestamp? createdAt,
+    Timestamp? updatedAt,
   }) {
     return TaskModel(
       id: id ?? this.id,
       description: description ?? this.description,
       createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
     );
   }
 
   @override
-  List<Object?> get props => [id, description, createdAt];
+  List<Object?> get props => [
+        id,
+        description,
+        createdAt,
+        updatedAt,
+      ];
 }

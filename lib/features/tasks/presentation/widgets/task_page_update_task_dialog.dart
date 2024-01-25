@@ -46,6 +46,7 @@ class _TaskPageUpdateTaskDialogState extends State<TaskPageUpdateTaskDialog> {
       TaskModel(
         description: description,
         createdAt: Timestamp.now(),
+        updatedAt: Timestamp.now(),
       ),
     );
   }

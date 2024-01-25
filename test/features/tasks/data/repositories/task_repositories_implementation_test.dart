@@ -25,11 +25,12 @@ void main() {
   tListTaskModel.add(tTaskModel);
 
   test('should return task model when calls datasource', () async {
-    when(() => dataSource.getTasks()).thenAnswer((_) async => tListTaskModel);
+    when(() => dataSource.getTasks())
+        .thenAnswer((_) async => (true, tListTaskModel));
 
     final result = await repository.getTasks();
 
-    await expectLater(result, tListTaskModel);
+    await expectLater(result, (true, tListTaskModel));
 
     verify(() => dataSource.getTasks()).called(1);
   });

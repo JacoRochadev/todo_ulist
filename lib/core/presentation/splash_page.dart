@@ -17,7 +17,7 @@ class _SplashPageState extends State<SplashPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(seconds: 2));
       if (!mounted) return;
-      Modular.to.pushReplacementNamed('/tasks');
+      Modular.to.pushReplacementNamed('/tasks/');
     });
   }
 

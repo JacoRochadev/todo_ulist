@@ -14,7 +14,7 @@ class AppModule extends Module {
     );
 
     r.module(
-      '/tasks',
+      '/tasks/',
       module: TasksModule(),
     );
   }

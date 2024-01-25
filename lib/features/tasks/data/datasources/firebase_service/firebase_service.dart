@@ -10,7 +10,7 @@ class FirebaseService {
     CollectionReference tasks = firestore.collection('tasks');
     TaskEntity task = TaskEntity(
       description: description,
-      createdAt: DateTime.now(),
+      createdAt: Timestamp.now(),
     );
     tasks.add({task});
     return task;

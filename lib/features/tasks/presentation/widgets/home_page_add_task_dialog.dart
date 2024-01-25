@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_ulist/features/tasks/domain/entities/task_entity.dart';
 
@@ -45,7 +46,7 @@ class _HomePageTaskDialogState extends State<HomePageTaskDialog> {
     widget.onAddTask(
       TaskEntity(
         description: name,
-        createdAt: DateTime.now(),
+        createdAt: Timestamp.now(),
       ),
     );
   }

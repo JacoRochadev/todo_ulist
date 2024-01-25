@@ -1,16 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:todo_ulist/features/tasks/data/models/task_model.dart';
+import 'package:todo_ulist/features/tasks/domain/entities/task_entity.dart';
 
 class FirebaseService {
-  Future<void> createTask({
+  Future<TaskEntity> createTask({
     required String description,
   }) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     CollectionReference tasks = firestore.collection('tasks');
-    tasks.add({
-      'description': description,
-      'createdAt': DateTime.now(),
-    });
+    TaskEntity task = TaskEntity(
+      description: description,
+      createdAt: DateTime.now(),
+    );
+    tasks.add({task});
+    return task;
   }
 
   Future<void> deleteTask({
@@ -21,13 +24,12 @@ class FirebaseService {
     tasks.doc(id).delete();
   }
 
-  Future<void> updateTask({
-    required String description,
-  }) async {
+  Future<void> updateTask(
+      {required TaskEntity tasksOld, required TaskEntity tasksNew}) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     CollectionReference tasks = firestore.collection('tasks');
     tasks.doc().update({
-      'description': description,
+      'tasks': tasksNew,
     });
   }
 

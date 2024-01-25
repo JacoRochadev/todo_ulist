@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import 'components/custom_loading_component.dart';
 
@@ -16,7 +17,7 @@ class _SplashPageState extends State<SplashPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(seconds: 2));
       if (!mounted) return;
-      Navigator.pushReplacementNamed(context, '/tasks');
+      Modular.to.pushReplacementNamed('/tasks');
     });
   }
 

@@ -23,7 +23,7 @@ class TaskRepositoryImplementation implements ITasksRepository {
   }
 
   @override
-  Future<List<TaskModel>> getTasks() async {
+  Future<(bool, List<TaskModel>)> getTasks() async {
     final result = await _datasource.getTasks();
     return result;
   }

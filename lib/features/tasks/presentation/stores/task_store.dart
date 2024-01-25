@@ -16,14 +16,22 @@ abstract class _TaskStoreBase with Store {
   @observable
   ObservableList<TaskEntity> taskList = ObservableList<TaskModel>();
 
+  @observable
+  bool isError = false;
+
+  @action
+  void changeIsError(bool value) => isError = value;
+
   @action
   void changeTasksList(List<TaskModel> value) =>
       taskList = value.asObservable();
 
   @action
-  Future<void> getTasks() async {
+  Future<(bool, List<TaskModel>)> getTasks() async {
     final tasks_ = await _useCases.getTasks();
-    changeTasksList(tasks_);
+    changeIsError(tasks_.$1);
+    changeTasksList(tasks_.$2);
+    return tasks_;
   }
 
   @action

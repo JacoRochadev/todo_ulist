@@ -21,7 +21,7 @@ class TaskDatasourceImplementation implements ITaskDatasource {
   }
 
   @override
-  Future<List<TaskModel>> getTasks() {
+  Future<(bool, List<TaskModel>)> getTasks() {
     return _firebaseService.getTasks();
   }
 

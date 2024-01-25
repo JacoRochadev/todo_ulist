@@ -5,29 +5,22 @@ import 'package:todo_ulist/features/tasks/data/models/task_model.dart';
 class FirebaseService {
   final _firestore = FirebaseFirestore.instance;
 
-  Future<List<TaskModel>> getTasks() async {
+  Future<(bool, List<TaskModel>)> getTasks() async {
     List<TaskModel> tasks = [];
-
     try {
       var querySnapshot = await _firestore.collection("tasks").get();
-
       for (var docSnapshot in querySnapshot.docs) {
         debugPrint('${docSnapshot.id} => ${docSnapshot.data()}');
-
         if (docSnapshot.exists) {
           Map<String, dynamic> jsonData = docSnapshot.data();
-
           TaskModel task = TaskModel.fromJson(jsonData);
           tasks.add(task);
         }
       }
-
-      debugPrint("Successfully completed");
+      return (true, tasks);
     } catch (e) {
-      debugPrint("Error completing: $e");
+      return (false, tasks);
     }
-
-    return tasks;
   }
 
   Future<TaskModel> createTask({

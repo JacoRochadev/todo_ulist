@@ -7,7 +7,7 @@ class TaskUseCases {
 
   TaskUseCases(this._repository);
 
-  Future<List<TaskModel>> getTasks() async {
+  Future<(bool, List<TaskModel>)> getTasks() async {
     return await _repository.getTasks();
   }
 

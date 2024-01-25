@@ -29,7 +29,7 @@ mixin _$TaskStore on _TaskStoreBase, Store {
       AsyncAction('_TaskStoreBase.getTasks', context: context);
 
   @override
-  Future<void> getTasks() {
+  Future<(bool, List<TaskModel>)> getTasks() {
     return _$getTasksAsyncAction.run(() => super.getTasks());
   }
 

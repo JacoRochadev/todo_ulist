@@ -41,6 +41,10 @@ class _TaskPageState extends State<TaskPage> {
             child: Center(
               child: ListView(
                 children: [
+                  if (widget.controller.isError)
+                    const Center(
+                      child: Text('Erro ao carregar as tarefas!'),
+                    ),
                   if (widget.controller.taskList.isEmpty)
                     const Center(
                       child: Text('Adicione uma nova tarefa!'),

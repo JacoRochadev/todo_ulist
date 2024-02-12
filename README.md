@@ -1,5 +1,5 @@
 # todo_ulist
-Projeto feito para desafio técnico da uList
+
 
 Problemas ao rodar o projeto? rode estes comandos: 
 flutter clean |
